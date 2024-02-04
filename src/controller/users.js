@@ -16,32 +16,62 @@ const getAllUsers = async (req, res) => {
 }
 
 const createUsers = (req, res) => {
-  res.json({
-    message: 'CREATE Users Success',
-    data: req.body
-  })
+  const { body } = req; // sama dengan req.body
+
+  try {
+    modelUsers.createUser(body)
+
+    res.json({
+      message: 'CREATE Users Success',
+      data: body
+    })
+  } catch (error) {
+    res.json({
+      message: 'Data Error',
+      serverMessage: error
+    })
+  }
 }
 
-const updateUsers = (req, res) => {
-  const { id } = req.params
-  console.log(id);
-  res.json({
-    message: 'UPATE Users success',
-    data: req.body
-  })
+const updateUsers = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  try {
+    await modelUsers.updateUser(body, id)
+
+    res.json({
+      message: 'UPATE Users success',
+      data: {
+        id: id,
+        ...body
+      }
+
+    })
+  } catch (error) {
+    res.json({
+      message: 'Data Error',
+      serverMessage: error
+    })
+  }
 }
 
 const deleteUsers = (req, res) => {
   const { id } = req.params;
-  res.json({
-    message: 'DELETE Users success',
-    data: {
-      id,
-      name: 'Agung',
-      email: 'agung@gmail.com',
-      address: 'Jakarta'
-    }
-  })
+
+  try {
+    modelUsers.deleteUser(id);
+
+    res.json({
+      message: 'DELETE Users success',
+      data: null
+    })
+  } catch (error) {
+    res.json({
+      message: 'Data Error',
+      serverMessage: error
+    })
+  }
 }
 
 module.exports = {

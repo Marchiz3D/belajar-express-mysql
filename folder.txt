@@ -1,5 +1,0 @@
-Config: Untuk setup database
-Routes: untuk menyimpan seluruh Routes
-Controller: Untuk menyimpan fungsi2 untuk routes
-Middleware: Untuk menyimpan Middleware
-models: Untuk membuat model/schema dari database

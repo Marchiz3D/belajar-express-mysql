@@ -21,7 +21,7 @@ const createUsers = (req, res) => {
   try {
     modelUsers.createUser(body)
 
-    res.json({
+    res.status(201).json({
       message: 'CREATE Users Success',
       data: body
     })
